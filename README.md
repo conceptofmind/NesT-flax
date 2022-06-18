@@ -1,4 +1,11 @@
-# nest_flax
+## NesT
+
+<img src="./images/nest.png" width="400px"></img>
+
+This <a href="https://arxiv.org/abs/2105.12723">paper</a> decided to process the image in hierarchical stages, with attention only within tokens of local blocks, which aggregate as it moves up the heirarchy. The aggregation is done in the image plane, and contains a convolution and subsequent maxpool to allow it to pass information across the boundary.
+
+## In collaboration with:
+- [Dr. Phil Wang](https://github.com/lucidrains/)
 
 ## Usage
 
