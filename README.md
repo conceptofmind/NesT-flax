@@ -2,7 +2,13 @@
 
 <img src="./nest.png" width="800px"></img>
 
-This <a href="https://arxiv.org/abs/2105.12723">paper</a> decided to process the image in hierarchical stages, with attention only within tokens of local blocks, which aggregate as it moves up the heirarchy. The aggregation is done in the image plane, and contains a convolution and subsequent maxpool to allow it to pass information across the boundary.
+"Hierarchical structures are popular in recent vision transformers, however, they require sophisticated designs and massive datasets to work well. In this paper, we explore the idea of nesting basic local transformers on non-overlapping image blocks and aggregating them in a hierarchical way. We find that the block aggregation function plays a critical role in enabling cross-block non-local information communication. This observation leads us to design a simplified architecture that requires minor code changes upon the original vision transformer. The benefits of the proposed judiciously-selected design are threefold: (1) NesT converges faster and requires much less training data to achieve good generalization on both ImageNet and small datasets like CIFAR; (2) when extending our key ideas to image generation, NesT leads to a strong decoder that is 8× faster than previous transformer-based generators; and (3) we show that decoupling the feature learning and abstraction processes via this nested hierarchy in our design enables constructing a novel method (named GradCAT) for visually interpreting the learned model." - Zizhao Zhang, Han Zhang, Long Zhao, Ting Chen, Sercan O. Arik, Tomas Pfister
+
+### Research Paper:
+- https://arxiv.org/abs/2105.12723
+
+### Official repository:
+- https://github.com/google-research/nested-transformer
 
 ## Acknowledgement:
 I have been greatly inspired by the brilliant code of [Dr. Phil 'Lucid' Wang](https://github.com/lucidrains). Please check out his [open-source implementations](https://github.com/lucidrains) of multiple different transformer architectures and [support](https://github.com/sponsors/lucidrains) his work.
@@ -27,8 +33,7 @@ v = NesT(
 )
 
 init_rngs = {'params': jax.random.PRNGKey(1), 
-            'dropout': jax.random.PRNGKey(2), 
-            'emb_dropout': jax.random.PRNGKey(3)}
+            'dropout': jax.random.PRNGKey(2)}
 
 params = v.init(init_rngs, img)
 output = v.apply(params, img, rngs=init_rngs)
@@ -39,12 +44,6 @@ n_params_flax = sum(
 )
 print(f"Number of parameters in Flax model: {n_params_flax}")
 ```
-## Todo
-
-- [x] Build model
-- [ ] Implement pip installer
-- [ ] Implement huggingface streaming dataloaders
-- [ ] Implement training scripy
 
 ## Author:
 - Enrico Shippole
